@@ -1,5 +1,5 @@
 import React from 'react';
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import Layout from '../elements/Layout.js';
 import NotFound from '../elements/NotFound.js';
@@ -37,8 +37,6 @@ const Article = () => {
     }, []);
 
     return <Layout>
-        <h3>This is article {params.articleId}</h3>
-
         {success? <>
                 <div>
                     <h3>{`Author: ${meta.author.name}`}</h3>
