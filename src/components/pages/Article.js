@@ -6,6 +6,7 @@ import NotFound from '../elements/NotFound.js';
 import {
     useRouteMatch
 } from "react-router-dom";
+import { Container } from 'semantic-ui-react';
 
 const Article = () => {
     const [content, setContent] = useState('')
@@ -22,13 +23,13 @@ const Article = () => {
     const [success, setSuccess] = useState(false)
     const {params} = useRouteMatch('/article/:articleId');
     useEffect(() => {
-        fetch(`http://localhost:9000/${params.articleId}/index.md`)
+        fetch(`http://3.136.157.78:9000/${params.articleId}/index.md`)
             .then((res) => {
                 setSuccess(res.ok);
                 return res.text();
             }).then((data) => {
                 setContent(data);
-                return fetch(`http://localhost:9000/${params.articleId}/meta.json`);
+                return fetch(`http://3.136.157.78:9000/${params.articleId}/meta.json`);
             }).then((res) => {
                 return res.json();
             }).then((meta) => {
@@ -37,19 +38,20 @@ const Article = () => {
     }, []);
 
     return <Layout>
-        {success? <>
-                <div>
-                    <h3>{`Author: ${meta.author.name}`}</h3>
-                    <h3>{`Facebook: ${meta.author.facebook}`}</h3>
-                    <h3>{`Instagram: ${meta.author.instagram}`}</h3>
-                    <h3>{`YouTube: ${meta.author.youtube}`}</h3>
-                </div>
-                <ReactMarkdown source={content}/>
-            </>
-        :
-            <NotFound/>
-        }
-
+        <Container text>
+            {success? <>
+                    <div>
+                        <h3>{`Author: ${meta.author.name}`}</h3>
+                        <h3>{`Facebook: ${meta.author.facebook}`}</h3>
+                        <h3>{`Instagram: ${meta.author.instagram}`}</h3>
+                        <h3>{`YouTube: ${meta.author.youtube}`}</h3>
+                    </div>
+                    <ReactMarkdown source={content}/>
+                </>
+            :
+                <NotFound/>
+            }
+        </Container>
     </Layout>
 };
 
