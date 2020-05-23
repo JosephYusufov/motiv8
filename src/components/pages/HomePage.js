@@ -10,7 +10,7 @@ const HomePage = () => {
     const history = useHistory();
     const [articles, setArticles] = useState(null);
     useEffect(() => {
-        fetch(`http://3.136.157.78:9000/list`)
+        fetch(`https://josephyusufov.me/list`)
             .then(res => {
                 // console.log(res);
                 return res.json();

@@ -23,13 +23,13 @@ const Article = () => {
     const [success, setSuccess] = useState(false)
     const {params} = useRouteMatch('/article/:articleId');
     useEffect(() => {
-        fetch(`http://3.136.157.78:9000/${params.articleId}/index.md`)
+        fetch(`https://josephyusufov.me/${params.articleId}/index.md`)
             .then((res) => {
                 setSuccess(res.ok);
                 return res.text();
             }).then((data) => {
                 setContent(data);
-                return fetch(`http://3.136.157.78:9000/${params.articleId}/meta.json`);
+                return fetch(`https://josephyusufov.me/${params.articleId}/meta.json`);
             }).then((res) => {
                 return res.json();
             }).then((meta) => {
