@@ -51,6 +51,19 @@ const Article = () => {
                             }}
                         />
                     </StyledMarkdown>
+                    <MobileAuthor classname="mobile-author">
+                        <div className="author">
+                            {meta.author.profilePicture && <Image rounded fluid src={meta.author.profilePicture} alt="Profile"></Image>}
+                            <Header as='h2'>{meta.author.name && meta.author.name}</Header>
+                            <p>{meta.author.description && meta.author.description}</p>
+                            <div className="icons">
+                                {meta.author.facebook && <i className="big facebook f icon"></i>}
+                                {meta.author.youtube && <i className="big youtube icon"></i>}               
+                                {meta.author.instagram && <i className="big instagram icon"></i>}     
+                                {meta.author.twitter && <i className="big twitter icon"></i>}
+                            </div>
+                        </div>
+                    </MobileAuthor>
                 </>
             : success === false &&
                 <NotFound/>
@@ -59,13 +72,14 @@ const Article = () => {
     </Layout>
 };
 
+const MobileAuthor = styled.div`
+    display: none;
+    @media only screen and (max-width: 600px) {
+        display: block;
+    }
+
+`
 const StyledMarkdown = styled.div`
-    h1{
-        font-size: 4rem !important;
-    }
-    p{
-        font-size: 1.5rem !important;
-    }
     *{
         margin: 30px;
     }
