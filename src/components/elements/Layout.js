@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
-import { Header, Icon} from 'semantic-ui-react';
+import { Header, Icon, Advertisement } from 'semantic-ui-react';
 import { Link, NavLink } from 'react-router-dom';
 
 const Root = styled.div`
@@ -18,9 +19,12 @@ const Root = styled.div`
     .feedContainer{
     }
     .content{
-        margin: 0px 20px;
+        margin: 50px 20px;
         // margin-top: 10px;
         grid-area: content;
+        display: flex;
+        justify-content: center;
+        // width: 100%;
     }
     .sidebar{
         height: 100vh;
@@ -61,20 +65,62 @@ const Root = styled.div`
         top: 0; /* Stay at the top */
         overflow-x: hidden; /* Disable horizontal scroll */
         display: flex;
+        flex-direction: column;
         height: 100vh;
         align-items: center;
-        justify-content: center;
+        justify-content: space-around;
     }
     .nav-link{
         padding: 2px;
     }
     .nav-link:hover{
-        // background-color: #31b9ffaa;
         color: #31b9ffaa;
         transition: 0.15s;
     }
+    .author{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        jistify-content: center;
+        align-items: center;
+        padding: 0px 10%;
+        p{
+            font-size: 1.3rem !important;
+        }
+    }
+    .icons{
+        display: flex;
+        width: 100%;
+        justify-content: space-around;
+        align-items: space-between;
+        i{
+            cursor: pointer;
+            padding: 2px;
+        }
+        i:hover{
+            color: #31b9ffaa;
+            transition: 0.25s;
+        }
+    }
+    @media only screen and (max-width: 1100px) {
+        height: 100vh;
+        display: grid;
+        grid-template-columns: 1fr 200px;
+        grid-template-areas: 
+            "content adbar";
+        .adbar-content{
+            width: 200px;
+        }
+    }
 `
-const Layout = ({children}) => {
+const Layout = ({meta, children}) => {
+    const [author, setAuthor] = useState({});
+    useEffect(() => {
+        if(meta){
+            setAuthor(meta.author);
+        };
+    },[meta]);
+
     return <Root>
         <div className="sidebar" >
             <div className="sidebar-content">
@@ -91,7 +137,20 @@ const Layout = ({children}) => {
         </div>
         <div className="adbar">
             <div className="adbar-content">
-                <img src="https://placekitten.com/300/200" alt="article"></img>
+                <div className="author">
+                    {author.profilePicture && <img src={author.profilePicture} alt="Profile"></img>}
+                    <Header as='h2'>{author.name && author.name}</Header>
+                    <p>{author.description && author.description}</p>
+                    <div className="icons">
+                        {author.facebook && <i className="big facebook f icon"></i>}
+                        {author.youtube && <i className="big youtube icon"></i>}               
+                        {author.instagram && <i className="big instagram icon"></i>}     
+                        {author.twitter && <i className="big twitter icon"></i>}
+                    </div>
+                </div>
+                <Advertisement unit='small rectangle'>
+                    <img alt='ad' src='https://react.semantic-ui.com/images/wireframe/image.png' />
+                </Advertisement>
             </div>
         </div>
     </Root>
