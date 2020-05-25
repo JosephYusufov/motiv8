@@ -13,6 +13,9 @@ const Root = styled.div`
     grid-template-areas: 
         "sidebar content adbar";
 
+    p{
+        font-size: 1.5rem;
+    }        
     .selected-nav{
         *{
         color: #31b9ffaa;
@@ -107,9 +110,6 @@ const Root = styled.div`
     h1{
         font-size: 3rem;
     }
-    p{
-        1rem;
-    }
     @media only screen and (max-width: 1100px) {
         height: 100vh;
         display: grid;
@@ -151,8 +151,9 @@ const Root = styled.div`
         grid-template-columns: 1fr;
         grid-template-areas: 
             "content";
-
-        
+        p{
+            font-size: 1.5rem;
+        }        
         .mobile-navbar{
             .logo-container{
                 display: flex;
@@ -187,16 +188,16 @@ const Layout = ({meta, children}) => {
     },[meta]);
 
     return <>
-        <Root>
+        <Menu id="sidenav-menu" pageWrapId="page-wrap">
+            <NavLink exact to='/' activeClassName="selected-nav"><Header className="nav-link" as="h1">Home</Header></NavLink>
+            <Link to='/' activeClassName="selected-nav"><Header className="nav-link" as="h1">Search <Icon size="tiny" style={{fontSize: "1em", margin: 0}} name="search"/></Header></Link>
+            <NavLink exact to='/software' activeClassName="selected-nav"><Header className="nav-link" as="h1">Software</Header></NavLink>
+            <NavLink exact to='/hardware' activeClassName="selected-nav"><Header className="nav-link" as="h1">Hardware</Header></NavLink>
+            <NavLink exact to='/business' activeClassName="selected-nav"><Header className="nav-link" as="h1">Business</Header></NavLink>
+            <NavLink exact to='/gaming' activeClassName="selected-nav"><Header className="nav-link" as="h1">Gaming</Header></NavLink>
+        </Menu>
+        <Root id="page-wrap">
         <div className="mobile-navbar">
-            <Menu>
-                <NavLink exact to='/' activeClassName="selected-nav"><Header className="nav-link" as="h1">Home</Header></NavLink>
-                <Link to='/' activeClassName="selected-nav"><Header className="nav-link" as="h1">Search <Icon size="tiny" style={{fontSize: "1em", margin: 0}} name="search"/></Header></Link>
-                <NavLink exact to='/software' activeClassName="selected-nav"><Header className="nav-link" as="h1">Software</Header></NavLink>
-                <NavLink exact to='/hardware' activeClassName="selected-nav"><Header className="nav-link" as="h1">Hardware</Header></NavLink>
-                <NavLink exact to='/business' activeClassName="selected-nav"><Header className="nav-link" as="h1">Business</Header></NavLink>
-                <NavLink exact to='/gaming' activeClassName="selected-nav"><Header className="nav-link" as="h1">Gaming</Header></NavLink>
-            </Menu>
             <div className="logo-container">
                 <img src="https://placekitten.com/40/40" alt="logo"></img>
             </div>

@@ -87,7 +87,7 @@ const StyledMarkdown = styled.div`
 `
 
 const ArticleBox = styled.div`
-    width: 90%;
+    width: 100%;
     max-width: 800px;
 `
 

@@ -62,4 +62,21 @@
   .bm-overlay {
     background: rgba(0, 0, 0, 0.3);
   }
-  
+  @media only screen and (min-width: 1100px) {
+
+    #sidenav-menu{
+      display: none;
+    }
+
+    #sidenav-menu * {
+      display: none;
+    }
+    .bm-burger-button{
+      display: none;
+    }
+  }
+  /* @media only screen and (max-width: 600) { */
+    .article-description{
+      display: none !important;
+    }
+  /* } */

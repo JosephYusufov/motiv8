@@ -22,7 +22,7 @@ const HomePage = () => {
 
     const Root = styled.div`
         .articleContainer{
-            height: 20vh;
+            height: 150px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -50,6 +50,14 @@ const HomePage = () => {
             font-size: 4rem !important;
             text-align: center;
         }
+        @media only screen and (max-width: 600) {
+            .article-img{
+                height: 50px;
+            }
+            .article-description{
+                display; none !important;
+            }
+        }
     `
     return <Layout>
         <Root>
@@ -61,10 +69,10 @@ const HomePage = () => {
                         <div className="articleContainer" key={"article-" + i}>
                             <div>
                                 <Header as="h2">{article.title}</Header>
-                                <p>{article.description}</p>
+                                {/* <p classname="article-description">{article.description}</p> */}
                                 <p>{article.author.name}</p>
                             </div>
-                            <img src={article.image} alt="article"></img>
+                            <img className="article-img" src={article.image} style={{height: 100}} alt="article"></img>
                         </div>
                     </div>;
                 })
