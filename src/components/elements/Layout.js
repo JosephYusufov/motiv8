@@ -1,12 +1,18 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 import styled from 'styled-components';
-import { Header, Icon, Advertisement, Image } from 'semantic-ui-react';
-import { Link, NavLink } from 'react-router-dom';
+import { Header, Icon, Advertisement, Image, Divider } from 'semantic-ui-react';
+import { Link, NavLink, useHistory } from 'react-router-dom';
 import { slide as Menu } from 'react-burger-menu';
+import logo from '../../assets/bitwise-logo.png';
 import './sideMenu.css';
 
 const Root = styled.div`
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
+    font-family: 'Noto Sans', sans-serif;
+    *{
+        font-family: 'Noto Sans', sans-serif;
+    }
     height: 100vh;
     display: grid;
     grid-template-columns: 200px 1fr 350px;
@@ -18,17 +24,20 @@ const Root = styled.div`
     }        
     .selected-nav{
         *{
-        color: #31b9ffaa;
+        color: #8c52ff;
         }
     }
     .feedContainer{
     }
     .content{
-        margin: 50px 20px;
+        margin: 30px 20px;
         // margin-top: 10px;
         grid-area: content;
         display: flex;
         justify-content: center;
+        // width: 100%;
+        // max-width: 800px;
+    
         // width: 100%;
     }
     .sidebar{
@@ -73,7 +82,7 @@ const Root = styled.div`
         padding: 2px;
     }
     .nav-link:hover{
-        color: #31b9ffaa;
+        color: #8c52ff;
         transition: 0.15s;
     }
     .author{
@@ -97,7 +106,7 @@ const Root = styled.div`
             padding: 2px;
         }
         i:hover{
-            color: #31b9ffaa;
+            color: #8c52ff;
             transition: 0.25s;
         }
     }
@@ -181,6 +190,7 @@ const Root = styled.div`
 `
 const Layout = ({meta, children}) => {
     const [author, setAuthor] = useState({});
+    const history = useHistory();
     useEffect(() => {
         if(meta){
             setAuthor(meta.author);
@@ -199,17 +209,19 @@ const Layout = ({meta, children}) => {
         <Root id="page-wrap">
         <div className="mobile-navbar">
             <div className="logo-container">
-                <img src="https://placekitten.com/40/40" alt="logo"></img>
+                <img onClick={() => {history.push('/')}} style={{cursor: "pointer"}} src={logo} height="40px" alt="logo"></img>
             </div>
         </div>
             <div className="sidebar" >
                 <div className="sidebar-content">
-                    <NavLink exact to='/' activeClassName="selected-nav"><Header className="nav-link" as="h1">Home</Header></NavLink>
-                    <Link to='/' activeClassName="selected-nav"><Header className="nav-link" as="h1">Search <Icon size="tiny" style={{fontSize: "1em", margin: 0}} name="search"/></Header></Link>
-                    <NavLink exact to='/software' activeClassName="selected-nav"><Header className="nav-link" as="h1">Software</Header></NavLink>
-                    <NavLink exact to='/hardware' activeClassName="selected-nav"><Header className="nav-link" as="h1">Hardware</Header></NavLink>
-                    <NavLink exact to='/business' activeClassName="selected-nav"><Header className="nav-link" as="h1">Business</Header></NavLink>
-                    <NavLink exact to='/gaming' activeClassName="selected-nav"><Header className="nav-link" as="h1">Gaming</Header></NavLink>
+                    <Image onClick={() => history.push('/')} src={logo} style={{cursor: "pointer"}}></Image>
+                    <Divider></Divider>
+                    <NavLink exact to='/' activeClassName="selected-nav"><Header className="nav-link" as="h2">Home</Header></NavLink>
+                    <Link to='/' activeClassName="selected-nav"><Header className="nav-link" as="h2">Search <Icon size="tiny" style={{fontSize: "1em", margin: 0}} name="search"/></Header></Link>
+                    <NavLink exact to='/software' activeClassName="selected-nav"><Header className="nav-link" as="h2">Software</Header></NavLink>
+                    <NavLink exact to='/hardware' activeClassName="selected-nav"><Header className="nav-link" as="h2">Hardware</Header></NavLink>
+                    <NavLink exact to='/business' activeClassName="selected-nav"><Header className="nav-link" as="h2">Business</Header></NavLink>
+                    <NavLink exact to='/gaming' activeClassName="selected-nav"><Header className="nav-link" as="h2">Gaming</Header></NavLink>
                 </div>
             </div>
             <div className="content">

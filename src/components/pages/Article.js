@@ -6,7 +6,7 @@ import NotFound from '../elements/NotFound.js';
 import {
     useRouteMatch
 } from "react-router-dom";
-import { Container, Header, Loader, Image } from 'semantic-ui-react';
+import { Divider, Header, Loader, Image, Icon } from 'semantic-ui-react';
 import styled from 'styled-components';
 
 const Article = () => {
@@ -43,6 +43,15 @@ const Article = () => {
             <Loader active={success == null}></Loader>
             {success === true? <>
                     <Image alt="banner" style={{marginBottom: 30}}fluid rounded src={meta.image}/>
+                    <h1 style={{textAlign: "center"}}>{meta && meta.title}</h1>
+                    <div style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center"
+                    }}>
+                        <img width="50px;" src={meta.author.profilePicture} style={{display: "block",  marginRight: 10, borderRadius: 25}}/>
+                        <p className="author-verified">{meta.author.name} <Icon name="circle check outline"></Icon></p>
+                    </div>
                     <StyledMarkdown>
                         <ReactMarkdown 
                             source={content}
@@ -51,6 +60,9 @@ const Article = () => {
                             }}
                         />
                     </StyledMarkdown>
+                    <br></br>
+                    <Divider></Divider>
+                    <br></br>
                     <MobileAuthor classname="mobile-author">
                         <div className="author">
                             {meta.author.profilePicture && <Image rounded fluid src={meta.author.profilePicture} alt="Profile"></Image>}
@@ -74,6 +86,7 @@ const Article = () => {
 
 const MobileAuthor = styled.div`
     display: none;
+    margin-bottom: 30px;
     @media only screen and (max-width: 600px) {
         display: block;
     }
@@ -89,6 +102,10 @@ const StyledMarkdown = styled.div`
 const ArticleBox = styled.div`
     width: 100%;
     max-width: 800px;
+    .author-verified{
+        color: #8c52ff !important;
+        text-align: center;
+    }
 `
 
 export default Article;

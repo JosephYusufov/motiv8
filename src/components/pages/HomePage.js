@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
-import { Header, Divider } from 'semantic-ui-react';
+import { Header, Divider, Icon } from 'semantic-ui-react';
 import Layout from './../elements/Layout.js';
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
@@ -21,6 +21,14 @@ const HomePage = () => {
     }, [])
 
     const Root = styled.div`
+    width: 100%;
+    max-width: 800px;
+    .author-name{
+        color: #8c52ff !important;
+        *{
+            color: #8c52ff !important;
+        }
+    }
         .articleContainer{
             height: 150px;
             display: flex;
@@ -31,6 +39,9 @@ const HomePage = () => {
             border: 1px solid #fff;
             border-radius: 5px;
             cursor: pointer;
+            width: 100%;
+            max-width: 800px;
+        
             *{
                 color: black;
             }
@@ -39,11 +50,7 @@ const HomePage = () => {
             }
         }
         .articleContainer:hover{
-            background-color: #fcfcff;
-            // *{
-            //     color: #31b9ffaa;
-            // }
-            border: 1px solid #31b9ffaa;
+            background-color: #fcfcfc;
             transition: 0.25s;
         }
         .page-header{ 
@@ -57,20 +64,21 @@ const HomePage = () => {
             .article-description{
                 display; none !important;
             }
+            .articleContainer{
+                flex-direction: column;
+            }
         }
     `
     return <Layout>
         <Root>
-            <Link to='/'><Header as="h1" className="page-header" >motiv8</Header></Link>
-            <Divider></Divider>
             {articles? 
                 articles.map((article, i) => {
-                    return <div fluid onClick={() => history.push(`/article/${article.path}`)}>
+                    return <div onClick={() => history.push(`/article/${article.path}`)}>
                         <div className="articleContainer" key={"article-" + i}>
                             <div>
                                 <Header as="h2">{article.title}</Header>
                                 {/* <p classname="article-description">{article.description}</p> */}
-                                <p>{article.author.name}</p>
+                                <p className="author-name">{article.author.name} <Icon name="check circle outline"></Icon></p>
                             </div>
                             <img className="article-img" src={article.image} style={{height: 100}} alt="article"></img>
                         </div>
