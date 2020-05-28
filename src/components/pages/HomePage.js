@@ -78,7 +78,7 @@ const HomePage = () => {
                             <div>
                                 <Header as="h2">{article.title}</Header>
                                 {/* <p classname="article-description">{article.description}</p> */}
-                                <p className="author-name">{article.author.name} <Icon name="check circle outline"></Icon></p>
+                                <p className="author-name">{article.author.name} <Icon name="check circle"></Icon></p>
                             </div>
                             <img className="article-img" src={article.image} style={{height: 100}} alt="article"></img>
                         </div>

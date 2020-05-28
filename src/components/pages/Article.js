@@ -25,13 +25,13 @@ const Article = () => {
     const {params} = useRouteMatch('/article/:articleId');
     useEffect(() => {
         // console.log(`https://api.readbitwise.com/${params.articleId}/index.md`);
-        fetch(`https://api.readbitwise.com/article/${params.articleId}/index.md`)
+        fetch(`https://api.readbitwise.com/article/${params.articleId}`)
             .then((res) => {
                 setSuccess(res.ok);
                 return res.text();
             }).then((data) => {
                 setContent(data);
-                return fetch(`https://api.readbitwise.com/meta/${params.articleId}/meta.json`);
+                return fetch(`https://api.readbitwise.com/meta/${params.articleId}`);
             }).then((res) => {
                 return res.json();
             }).then((meta) => {
@@ -48,10 +48,11 @@ const Article = () => {
                     <div style={{
                         display: "flex",
                         alignItems: "center",
-                        justifyContent: "center"
+                        justifyContent: "center",
+                        marginBottom: 30
                     }}>
                         <img width="50px;" src={meta.author.profilePicture} style={{display: "block",  marginRight: 10, borderRadius: 25}}/>
-                        <p className="author-verified">{meta.author.name} <Icon name="circle check outline"></Icon></p>
+                        <p className="author-verified">{meta.author.name} <Icon name="circle check"></Icon></p>
                     </div>
                     <StyledMarkdown>
                         <ReactMarkdown 
