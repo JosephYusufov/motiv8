@@ -98,6 +98,9 @@ const StyledMarkdown = styled.div`
     *{
         margin: 30px;
     }
+    img{
+        width: 100%;
+    }
 
 `
 

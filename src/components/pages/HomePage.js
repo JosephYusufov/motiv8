@@ -50,7 +50,7 @@ const HomePage = () => {
             }
         }
         .articleContainer:hover{
-            background-color: #fcfcfc;
+            background-color: #f0f0f0;
             transition: 0.25s;
         }
         .page-header{ 
