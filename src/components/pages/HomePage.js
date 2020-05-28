@@ -10,7 +10,7 @@ const HomePage = () => {
     const history = useHistory();
     const [articles, setArticles] = useState(null);
     useEffect(() => {
-        fetch(`https://josephyusufov.me/list`)
+        fetch(`https://api.readbitwise.com/list`)
             .then(res => {
                 // console.log(res);
                 return res.json();

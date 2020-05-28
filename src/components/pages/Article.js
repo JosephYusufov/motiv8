@@ -24,13 +24,14 @@ const Article = () => {
     const [success, setSuccess] = useState(null);
     const {params} = useRouteMatch('/article/:articleId');
     useEffect(() => {
-        fetch(`https://josephyusufov.me/${params.articleId}/index.md`)
+        // console.log(`https://api.readbitwise.com/${params.articleId}/index.md`);
+        fetch(`https://api.readbitwise.com/article/${params.articleId}/index.md`)
             .then((res) => {
                 setSuccess(res.ok);
                 return res.text();
             }).then((data) => {
                 setContent(data);
-                return fetch(`https://josephyusufov.me/${params.articleId}/meta.json`);
+                return fetch(`https://api.readbitwise.com/meta/${params.articleId}/meta.json`);
             }).then((res) => {
                 return res.json();
             }).then((meta) => {
