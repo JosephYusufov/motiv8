@@ -4,15 +4,19 @@ import styled from 'styled-components';
 import { Header, Icon, Advertisement, Image, Divider } from 'semantic-ui-react';
 import { Link, NavLink, useHistory } from 'react-router-dom';
 import { slide as Menu } from 'react-burger-menu';
+import Footer from './Footer.js';
 import logo from '../../assets/bitwise-logo.png';
 import './sideMenu.css';
 
+const FontProvider = styled.div`
+    @import url('https://fonts.googleapis.com/css2?family=Manrope&display=swap');    
+    font-family: 'Manrope', sans-serif;    
+        *{
+            font-family: 'Manrope', sans-serif;
+        }
+
+`
 const Root = styled.div`
-    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
-    font-family: 'Noto Sans', sans-serif;
-    *{
-        font-family: 'Noto Sans', sans-serif;
-    }
     height: 100vh;
     display: grid;
     grid-template-columns: 200px 1fr 350px;
@@ -22,15 +26,14 @@ const Root = styled.div`
     p{
         font-size: 1.5rem;
     }        
-    .selected-nav{
-        *{
+    .mobile-ad
+    .selected-nav *{
         color: #8c52ff;
-        }
     }
     .feedContainer{
     }
     .content{
-        margin: 30px 20px;
+        margin-top: 30px;
         // margin-top: 10px;
         grid-area: content;
         display: flex;
@@ -80,6 +83,7 @@ const Root = styled.div`
     }
     .nav-link{
         padding: 2px;
+        font-family: 'Manrope', sans-serif;
     }
     .nav-link:hover{
         color: #8c52ff;
@@ -154,9 +158,8 @@ const Root = styled.div`
             }
         }
         .content{
-            margin-top: 100px;
+            margin-top: 40px;
         }
-
     }
     @media only screen and (max-width: 600px) {
         height: 100vh;
@@ -187,9 +190,6 @@ const Root = styled.div`
                 display: block;
             }
         }
-        .content{
-            margin-top: 100px;
-        }
     }
 `
 const Layout = ({meta, children}) => {
@@ -217,14 +217,14 @@ const Layout = ({meta, children}) => {
         x.addListener(checkWidth); // Attach listener function on state changes   
     });
 
-    return <>
+    return <FontProvider>
         <Menu id="sidenav-menu" pageWrapId="page-wrap">
-            <NavLink exact to='/' activeClassName="selected-nav"><Header className="nav-link" as="h1">Home</Header></NavLink>
-            <Link to='/' activeClassName="selected-nav"><Header className="nav-link" as="h1">Search <Icon size="tiny" style={{fontSize: "1em", margin: 0}} name="search"/></Header></Link>
-            <NavLink exact to='/software' activeClassName="selected-nav"><Header className="nav-link" as="h1">Software</Header></NavLink>
-            <NavLink exact to='/hardware' activeClassName="selected-nav"><Header className="nav-link" as="h1">Hardware</Header></NavLink>
-            <NavLink exact to='/business' activeClassName="selected-nav"><Header className="nav-link" as="h1">Business</Header></NavLink>
-            <NavLink exact to='/gaming' activeClassName="selected-nav"><Header className="nav-link" as="h1">Gaming</Header></NavLink>
+            <NavLink exact to='/' activeClassName="selected-nav"><h1 className="nav-link">Home</h1></NavLink>
+            <Link to='/' activeClassName="selected-nav"><h1 className="nav-link">Search <Icon size="tiny" style={{fontSize: "1em", margin: 0}} name="search"/></h1></Link>
+            <NavLink exact to='/software' activeClassName="selected-nav"><h1 className="nav-link" as="h1">Software</h1></NavLink>
+            <NavLink exact to='/hardware' activeClassName="selected-nav"><h1 className="nav-link" as="h1">Hardware</h1></NavLink>
+            <NavLink exact to='/business' activeClassName="selected-nav"><h1 className="nav-link" as="h1">Business</h1></NavLink>
+            <NavLink exact to='/gaming' activeClassName="selected-nav"><h1 className="nav-link" as="h1">Gaming</h1></NavLink>
         </Menu>
         <Root id="page-wrap">
         <div className="mobile-navbar">
@@ -246,15 +246,18 @@ const Layout = ({meta, children}) => {
             </div>
             <div className="content">
                 <div style={{width: '100%'}}>
-                    <Advertisement id="banner-ad" unit="banner" test='banner'></Advertisement>
-                    {children}
+                    <div style={{padding: "20px 10px"}}>
+                        <Advertisement id="banner-ad" unit="banner" test='banner'></Advertisement>
+                        {children}
+                    </div>
+                    <Footer></Footer>
                 </div>
             </div>
             <div className="adbar">
                 <div className="adbar-content">
                     <div className="author">
                         {author.profilePicture && <Image fluid rounded src={author.profilePicture} alt="Profile"></Image>}
-                        <Header as='h2'>{author.name && author.name}</Header>
+                        <h2>{author.name && author.name}</h2>
                         <p>{author.description && author.description}</p>
                         <div className="icons">
                             {author.facebook && <i className="big facebook f icon"></i>}
@@ -267,7 +270,7 @@ const Layout = ({meta, children}) => {
                 </div>
             </div>
         </Root>
-    </>;
+    </FontProvider>;
 };
 
 export default Layout;

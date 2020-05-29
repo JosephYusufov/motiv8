@@ -9,6 +9,22 @@ import { Link } from 'react-router-dom';
 const HomePage = () => {
     const history = useHistory();
     const [articles, setArticles] = useState(null);
+    // const [width, setWidth] = useState('non-mobile');
+    // function checkWidth(x) {
+    //     if (x.matches) { // If media query matches
+    //         setWidth('mobile');
+    //         // console.log(width);
+    //     } else {
+    //         setWidth('non-mobile');
+    //         // console.log(width);
+    //     }
+    // };
+    // useEffect(() => {     
+    //     var x = window.matchMedia("(max-width: 600px)");
+    //     checkWidth(x); // Call listener function at run time
+    //     x.addListener(checkWidth); // Attach listener function on state changes   
+    // });
+
     useEffect(() => {
         fetch(`https://api.readbitwise.com/list`)
             .then(res => {
@@ -21,14 +37,14 @@ const HomePage = () => {
     }, [])
 
     const Root = styled.div`
-    width: 100%;
-    max-width: 800px;
-    .author-name{
-        color: #8c52ff !important;
-        *{
+        width: 100%;
+        max-width: 800px;
+        .author-name{
             color: #8c52ff !important;
+            *{
+                color: #8c52ff !important;
+            }
         }
-    }
         .articleContainer{
             height: 150px;
             display: flex;
@@ -41,7 +57,7 @@ const HomePage = () => {
             cursor: pointer;
             width: 100%;
             max-width: 800px;
-        
+
             *{
                 color: black;
             }
@@ -50,22 +66,39 @@ const HomePage = () => {
             }
         }
         .articleContainer:hover{
-            background-color: #f0f0f0;
+            background-color: #8c52ff11;
             transition: 0.25s;
         }
         .page-header{ 
             font-size: 4rem !important;
             text-align: center;
         }
-        @media only screen and (max-width: 600) {
-            .article-img{
-                height: 50px;
+        .article-img-mobile{
+            display: none;
+        }
+        .article-img-normal{
+            display: inline-block;
+        }
+        @media only screen and (max-width: 800px) {
+            .article-img-mobile{
+                width: 100%;
+                // height: 300px;
+                display: inline-block;
             }
-            .article-description{
-                display; none !important;
+            .article-img-normal{
+                display: none;
             }
             .articleContainer{
-                flex-direction: column;
+                display: block;
+                height: auto;
+                // flex-direction: column;
+            }
+            .articleContainer:hover{
+                background-color: #fff;
+            }
+            .article-info{
+                background-color: #8c52ff11;
+                padding: 20px;
             }
         }
     `
@@ -75,12 +108,13 @@ const HomePage = () => {
                 articles.map((article, i) => {
                     return <div onClick={() => history.push(`/article/${article.path}`)}>
                         <div className="articleContainer" key={"article-" + i}>
-                            <div>
-                                <Header as="h2">{article.title}</Header>
+                            <img className="article-img-mobile" style={{marginBottom: 0}} src={article.image} alt="article"></img>
+                            <div className="article-info" style={{marginTop: 0}}>
+                                <h2>{article.title}</h2>
                                 {/* <p classname="article-description">{article.description}</p> */}
                                 <p className="author-name">{article.author.name} <Icon name="check circle"></Icon></p>
                             </div>
-                            <img className="article-img" src={article.image} style={{height: 100}} alt="article"></img>
+                            <img className="article-img-normal" src={article.image} style={{height: 100}} alt="article"></img>
                         </div>
                     </div>;
                 })

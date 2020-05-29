@@ -86,7 +86,7 @@ const Article = () => {
                         <br></br>
                         <div className="author">
                             {meta.author.profilePicture && <Image rounded fluid src={meta.author.profilePicture} alt="Profile"></Image>}
-                            <Header as='h2'>{meta.author.name && meta.author.name}</Header>
+                            <h2 className="mobile-author-name">{meta.author.name && meta.author.name}</h2>
                             <p>{meta.author.description && meta.author.description}</p>
                             <div className="icons">
                                 {meta.author.facebook && <i className="big facebook f icon"></i>}
@@ -121,6 +121,9 @@ const StyledMarkdown = styled.div`
         margin-left: 0;
         margin-right: 0;
     }
+    .mobile-ad-container{
+        word-spacing: 3px;
+    }
 
 `
 
@@ -131,6 +134,13 @@ const ArticleBox = styled.div`
         color: #8c52ff !important;
         text-align: center;
     }
+    @media only screen and (max-width: 600px) {
+        .mobile-ad-container {
+            font-size: 1.5rem;
+            line-height: 27px;
+        }
+    }
+
 `
 
 export default Article;

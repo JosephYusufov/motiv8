@@ -9,7 +9,7 @@ const MobileAdContainer = ({children, ...others}) => {
         // display: flex;
         // flex-direction: column;
         // align-items: center;
-        width: 90%;
+        // width: 100%;
         .ad-disclaimer{
             margin-top: 0;
             margin-bottom: 0;
@@ -18,7 +18,7 @@ const MobileAdContainer = ({children, ...others}) => {
             text-align: center;
         }
     `
-    return <Root {...others}>
+    return <Root className="mobile-ad-container" {...others}>
         {children}
         {Math.round(Math.random() * 0.9) ?
             <div>
