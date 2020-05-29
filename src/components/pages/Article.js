@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 import { Divider, Header, Loader, Image, Icon } from 'semantic-ui-react';
 import styled from 'styled-components';
+import MobileAdContainer from '../elements/MobileAdContainer.js';
 
 const Article = () => {
     const [content, setContent] = useState('')
@@ -22,6 +23,10 @@ const Article = () => {
         }
     })
     const [success, setSuccess] = useState(null);
+    const [width, setWidth] = useState('non-mobile');
+    const markdownRenderers = {
+        paragraph: MobileAdContainer
+    };
     const {params} = useRouteMatch('/article/:articleId');
     useEffect(() => {
         // console.log(`https://api.readbitwise.com/${params.articleId}/index.md`);
@@ -38,6 +43,21 @@ const Article = () => {
                 setMeta(meta);
             });
     }, []);
+
+    function checkWidth(x) {
+        if (x.matches) { // If media query matches
+            setWidth('mobile');
+            // console.log(width);
+        } else {
+            setWidth('non-mobile');
+            // console.log(width);
+        }
+    };
+    useEffect(() => {     
+        var x = window.matchMedia("(max-width: 600px)");
+        checkWidth(x); // Call listener function at run time
+        x.addListener(checkWidth); // Attach listener function on state changes   
+    });
 
     return <Layout meta={meta}>
         <ArticleBox>
@@ -57,15 +77,13 @@ const Article = () => {
                     <StyledMarkdown>
                         <ReactMarkdown 
                             source={content}
-                            renderers={{
-                                header: <Header as="h1"/>
-                            }}
+                            renderers={width === 'mobile'? markdownRenderers: {}}
                         />
                     </StyledMarkdown>
                     <br></br>
-                    <Divider></Divider>
-                    <br></br>
                     <MobileAuthor classname="mobile-author">
+                        <Divider></Divider>
+                        <br></br>
                         <div className="author">
                             {meta.author.profilePicture && <Image rounded fluid src={meta.author.profilePicture} alt="Profile"></Image>}
                             <Header as='h2'>{meta.author.name && meta.author.name}</Header>
@@ -100,6 +118,8 @@ const StyledMarkdown = styled.div`
     }
     img{
         width: 100%;
+        margin-left: 0;
+        margin-right: 0;
     }
 
 `

@@ -119,6 +119,10 @@ const Root = styled.div`
     h1{
         font-size: 3rem;
     }
+    #banner-ad{
+        width: 100%;
+        margin-bottom: 15px;
+    }
     @media only screen and (max-width: 1100px) {
         height: 100vh;
         display: grid;
@@ -191,11 +195,27 @@ const Root = styled.div`
 const Layout = ({meta, children}) => {
     const [author, setAuthor] = useState({});
     const history = useHistory();
+    const [width, setWidth] = useState('normal');
     useEffect(() => {
         if(meta){
             setAuthor(meta.author);
         };
     },[meta]);
+
+    function checkWidth(x) {
+        if (x.matches) { // If media query matches
+            setWidth('small');
+            // console.log(width);
+        } else {
+            setWidth('normal');
+            // console.log(width);
+        }
+    };
+    useEffect(() => {     
+        var x = window.matchMedia("(max-width: 1100px)");
+        checkWidth(x); // Call listener function at run time
+        x.addListener(checkWidth); // Attach listener function on state changes   
+    });
 
     return <>
         <Menu id="sidenav-menu" pageWrapId="page-wrap">
@@ -225,7 +245,10 @@ const Layout = ({meta, children}) => {
                 </div>
             </div>
             <div className="content">
-                {children}
+                <div style={{width: '100%'}}>
+                    <Advertisement id="banner-ad" unit="banner" test='banner'></Advertisement>
+                    {children}
+                </div>
             </div>
             <div className="adbar">
                 <div className="adbar-content">
@@ -240,9 +263,7 @@ const Layout = ({meta, children}) => {
                             {author.twitter && <i className="big twitter icon"></i>}
                         </div>
                     </div>
-                    <Advertisement unit='small rectangle'>
-                        <img alt='ad' src='https://react.semantic-ui.com/images/wireframe/image.png' />
-                    </Advertisement>
+                    <Advertisement id="adbar-ad" unit={`${width === 'normal'? 'large' : 'small'} rectangle`} test="rectangle"></Advertisement>
                 </div>
             </div>
         </Root>
