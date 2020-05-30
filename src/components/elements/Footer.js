@@ -10,14 +10,14 @@ const Root = styled.div`
         font-family: 'Manrope', sans-serif;
     }
     .flex-container{
-        p{
-            font-size: 1rem;
-            text-decoration: underline;
-            cursor: pointer;
-        }
         display: flex;
         justify-content: space-around;
         margin-bottom: 20px;
+    }
+    .footer-link{
+        font-size: 1rem;
+        text-decoration: underline;
+        cursor: pointer;
     }
     .copy{
         text-align: center;
@@ -29,9 +29,9 @@ const Root = styled.div`
 const Footer = ({children, ...others}) => {
     return <Root {...others}>
         <div className="flex-container">
-            <p>About</p>
-            <p>Contact</p>
-            <p>Report</p>
+            <p className="footer-link">About</p>
+            <p className="footer-link">Contact</p>
+            <p className="footer-link">Report</p>
         </div>
         <p class="copy">Copyright Bitwise 2020</p>
     </Root>
