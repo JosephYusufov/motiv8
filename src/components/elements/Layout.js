@@ -250,7 +250,7 @@ const Layout = ({meta, children}) => {
                         <Advertisement id="banner-ad" unit="banner" test='banner'></Advertisement>
                         {children}
                     </div>
-                    <Footer></Footer>
+                    {/* <Footer></Footer> */}
                 </div>
             </div>
             <div className="adbar">
