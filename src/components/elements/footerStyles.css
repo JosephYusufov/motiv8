@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope&display=swap');    
+.root{
+    background-color: #8c52ff11;
+    padding: 30px;
+    font-family: 'Manrope', sans-serif;    
+}  
+.root *{
+    font-family: 'Manrope', sans-serif;
+}
+.flex-container{
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+.footer-link{
+    font-size: 1rem;
+    text-decoration: underline;
+    cursor: pointer;
+}
+.copy{
+    text-align: center;
+    font-size: 1rem;
+    color: #00000080
+}
