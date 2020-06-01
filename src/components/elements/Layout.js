@@ -125,6 +125,8 @@ const Root = styled.div`
     }
     #banner-ad{
         width: 100%;
+        max-width: 800px;
+        // margin: auto;
         margin-bottom: 15px;
     }
     @media only screen and (max-width: 1100px) {
@@ -246,11 +248,13 @@ const Layout = ({meta, children}) => {
             </div>
             <div className="content">
                 <div style={{width: '100%'}}>
-                    <div style={{padding: "20px 10px"}}>
-                        <Advertisement id="banner-ad" unit="banner" test='banner'></Advertisement>
-                        {children}
+                    <div style={{ padding: "20px 10px", width: "100%", display: "flex", justifyContent: "center"}}>
+                        <div style={{width: "100%", maxWidth: 800}}>
+                            <Advertisement id="banner-ad" unit="banner" test='banner'></Advertisement>
+                            {children}
+                        </div>
                     </div>
-                    {/* <Footer></Footer> */}
+                    <Footer></Footer>
                 </div>
             </div>
             <div className="adbar">
