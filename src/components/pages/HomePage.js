@@ -84,7 +84,7 @@ const HomePage = () => {
         }
         .description{
             color: #000000a0;
-            font-size: 12px;
+            font-size: 1.3rem;
         }
         @media only screen and (max-width: 800px) {
             .article-img-mobile{
