@@ -86,6 +86,44 @@ const HomePage = () => {
             color: #000000a0;
             font-size: 1.3rem;
         }
+        .featured{
+            transition: 0.25s;
+            background: rgb(0,196,204);
+            background: linear-gradient(90deg, rgba(0,196,204,1) 0%, rgba(124,42,232,1) 100%);
+            border-radius: 5px;
+            padding-bottom: 1px;
+            padding: 7px 7px 7px 7px;
+            .featured-indicator{
+                color: #FFFFFF;
+                width: 40%;
+                text-align: center;
+                font-weight: bold;
+                padding: 3px;
+                margin-left: 20px;
+                background: rgb(0,196,204);
+                background: linear-gradient(90deg, rgba(0,196,204,1) 0%, rgba(124,42,232,1) 100%);
+    
+            }
+            .articleContainer{
+                // flex-direction: column-reverse;
+                display: block;
+                background: #FFFFFF;
+                margin: 0;
+                height: 100%;
+                .article-img-normal{
+                    width: 100%;
+                    height: auto;
+                }
+                h2{
+                    font-size: 3rem;
+                }
+            }
+        }
+        .featured:hover{
+            padding: 1px 1px 13px 13px;
+            transition: 0.25s;
+
+        }
         @media only screen and (max-width: 800px) {
             .article-img-mobile{
                 width: 100%;
@@ -107,6 +145,11 @@ const HomePage = () => {
                 background-color: #8c52ff11;
                 padding: 20px;
             }
+            .featured{
+                .article-info{
+                    background-color: #FFFFFF;
+                }
+            }
         }
     `
     return <Layout>
@@ -114,6 +157,7 @@ const HomePage = () => {
             {articles? 
                 articles.map((article, i) => {
                     return <div style={{width: "100%"}} onClick={() => history.push(`/article/${article.path}`)}>
+                        {i > 0?
                         <div className="articleContainer" key={"article-" + i}>
                             <img className="article-img-mobile" style={{marginBottom: 0}} src={article.image} alt="article"></img>
                             <div className="article-info" style={{marginTop: 0}}>
@@ -123,6 +167,20 @@ const HomePage = () => {
                             </div>
                             <img className="article-img-normal" src={article.image} style={{height: 100}} alt="article"></img>
                         </div>
+                        :
+                        <div className="featured">
+                            <div className="articleContainer" key={"article-" + i}>
+                                <h3 className="featured-indicator">Featured by Bitwise</h3>
+                                <img className="article-img-mobile" style={{marginBottom: 0}} src={article.image} alt="article"></img>
+                                <img className="article-img-normal" src={article.image} alt="article"></img>
+                                <div className="article-info" style={{marginTop: 0}}>
+                                    <h2>{article.title}</h2>
+                                    <p className="description">{article.description}</p>
+                                    <p className="author-name">{article.author.name} <Icon name="check circle"></Icon></p>
+                                </div>
+                            </div>
+                        </div>
+                        }
                     </div>;
                 })
             :

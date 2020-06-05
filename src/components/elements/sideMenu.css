@@ -10,9 +10,9 @@
   }
   
   /* Change color on hover */
-  /* .bm-item:hover { */
-    /* color: white; */
-  /* } */
+  .bm-item:hover {
+    color: #8c52ff !important;
+  }
 /*    */
   /* The rest copied directly from react-burger-menu docs */
   

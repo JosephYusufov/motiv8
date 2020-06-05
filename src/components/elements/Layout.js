@@ -220,7 +220,7 @@ const Layout = ({meta, children}) => {
     });
 
     return <FontProvider>
-        <Menu id="sidenav-menu" pageWrapId="page-wrap">
+        <Menu id="sidenav-menu" pageWrapId="page-wrap" disableAutoFocus>
             <NavLink exact to='/' activeClassName="selected-nav"><h1 className="nav-link">Home</h1></NavLink>
             <Link to='/' activeClassName="selected-nav"><h1 className="nav-link">Search <Icon size="tiny" style={{fontSize: "1em", margin: 0}} name="search"/></h1></Link>
             <NavLink exact to='/software' activeClassName="selected-nav"><h1 className="nav-link" as="h1">Software</h1></NavLink>
