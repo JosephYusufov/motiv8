@@ -32,6 +32,13 @@ const HomePage = () => {
                 return res.json();
             }).then(jsonData => {
                 console.log(jsonData);
+                jsonData.sort((a, b) => {
+                    if(a.featured){
+                        return -1;
+                    } else {
+                        return 0;
+                    }
+                })
                 setArticles(jsonData);
             })
     }, [])
@@ -95,10 +102,10 @@ const HomePage = () => {
             padding: 7px 7px 7px 7px;
             .featured-indicator{
                 color: #FFFFFF;
-                width: 40%;
+                display: inline-block;
                 text-align: center;
                 font-weight: bold;
-                padding: 3px;
+                padding: 5px 10px;
                 margin-left: 20px;
                 background: rgb(0,196,204);
                 background: linear-gradient(90deg, rgba(0,196,204,1) 0%, rgba(124,42,232,1) 100%);
@@ -157,7 +164,7 @@ const HomePage = () => {
             {articles? 
                 articles.map((article, i) => {
                     return <div style={{width: "100%"}} onClick={() => history.push(`/article/${article.path}`)}>
-                        {i > 0?
+                        {!article.featured?
                         <div className="articleContainer" key={"article-" + i}>
                             <img className="article-img-mobile" style={{marginBottom: 0}} src={article.image} alt="article"></img>
                             <div className="article-info" style={{marginTop: 0}}>

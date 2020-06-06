@@ -1,6 +1,6 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
-import ReactMarkdown from 'react-markdown';
+import ReactMarkdown from 'react-markdown/with-html';
 import Layout from '../elements/Layout.js';
 import NotFound from '../elements/NotFound.js';
 import {
@@ -9,6 +9,7 @@ import {
 import { Divider, Header, Loader, Image, Icon } from 'semantic-ui-react';
 import styled from 'styled-components';
 import MobileAdContainer from '../elements/MobileAdContainer.js';
+import highlight from 'rehype-highlight';
 
 const Article = () => {
     const [content, setContent] = useState('')
@@ -78,6 +79,8 @@ const Article = () => {
                         <ReactMarkdown 
                             source={content}
                             renderers={width === 'mobile'? markdownRenderers: {}}
+                            escapeHtml={false}
+                            plugins={[require('rehype-highlight')]}
                         />
                     </StyledMarkdown>
                     <br></br>

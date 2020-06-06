@@ -19,18 +19,14 @@
 }
 
 .shadow-box:hover{
-    padding: 1px 1px 13px 13px;
+    padding: 2px 2px 12px 12px;
+    transition: 0.25s;
 }
 
-/* start section */
 .shadow-box{
     transition: 0.25s;
 }
 
-.shadow-box:hover{
-    transition: 0.25s;
-}
-/* end section*/
 
 .color-badge{
     background: rgb(0,196,204);
