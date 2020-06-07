@@ -9,7 +9,8 @@ import {
 import { Divider, Header, Loader, Image, Icon } from 'semantic-ui-react';
 import styled from 'styled-components';
 import MobileAdContainer from '../elements/MobileAdContainer.js';
-import highlight from 'rehype-highlight';
+import CodeBlock from '../elements/CodeBlock.js';
+import Prism from 'prismjs';
 
 const Article = () => {
     const [content, setContent] = useState('')
@@ -26,7 +27,8 @@ const Article = () => {
     const [success, setSuccess] = useState(null);
     const [width, setWidth] = useState('non-mobile');
     const markdownRenderers = {
-        paragraph: MobileAdContainer
+        paragraph: MobileAdContainer,
+        code: CodeBlock
     };
     const {params} = useRouteMatch('/article/:articleId');
     useEffect(() => {
@@ -64,7 +66,7 @@ const Article = () => {
         <ArticleBox>
             <Loader active={success == null}></Loader>
             {success === true? <>
-                    <Image alt="banner" style={{marginBottom: 30}}fluid rounded src={meta.image}/>
+                    <Image alt="banner" style={{marginBottom: 30, width: "100%"}} fluid rounded src={meta.image}/>
                     <h1 style={{textAlign: "center"}}>{meta && meta.title}</h1>
                     <div style={{
                         display: "flex",
@@ -78,9 +80,8 @@ const Article = () => {
                     <StyledMarkdown>
                         <ReactMarkdown 
                             source={content}
-                            renderers={width === 'mobile'? markdownRenderers: {}}
+                            renderers={width === 'mobile'? markdownRenderers: {code: CodeBlock}}
                             escapeHtml={false}
-                            plugins={[require('rehype-highlight')]}
                         />
                     </StyledMarkdown>
                     <br></br>
@@ -118,6 +119,7 @@ const MobileAuthor = styled.div`
 const StyledMarkdown = styled.div`
     *{
         margin: 30px;
+        // width: 100% !important;
     }
     img{
         width: 100%;
@@ -137,6 +139,7 @@ const ArticleBox = styled.div`
         color: #8c52ff !important;
         text-align: center;
     }
+
     @media only screen and (max-width: 600px) {
         .mobile-ad-container {
             font-size: 1.5rem;

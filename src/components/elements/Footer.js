@@ -8,7 +8,7 @@ const Footer = ({children, ...others}) => {
             <p className="footer-link">Contact</p>
             <p className="footer-link">Report</p>
         </div>
-        <p class="copy">Copyright Bitwise 2020</p>
+        <p className="copy">Copyright Bitwise 2020</p>
     </div>
 };
 
