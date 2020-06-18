@@ -119,7 +119,12 @@ const MobileAuthor = styled.div`
 const StyledMarkdown = styled.div`
     *{
         margin: 30px;
-        // width: 100% !important;
+    }
+    a{
+        display: inline;
+        margin: 0px;
+        color: #8c52ff;
+        background-color:#8c52ff40 
     }
     img{
         width: 100%;
