@@ -12,6 +12,15 @@ import MobileAdContainer from '../elements/MobileAdContainer.js';
 import CodeBlock from '../elements/CodeBlock.js';
 import Prism from 'prismjs';
 
+const NewTabLink = ({children, ...others}) => {
+    useEffect(() => {
+        console.log("hello");
+        console.log(children);
+        console.log(others);
+    }, [])
+    return <h1>Hello</h1>;
+};
+
 const Article = () => {
     const [content, setContent] = useState('')
     const [meta, setMeta] = useState({
@@ -28,7 +37,8 @@ const Article = () => {
     const [width, setWidth] = useState('non-mobile');
     const markdownRenderers = {
         paragraph: MobileAdContainer,
-        code: CodeBlock
+        code: CodeBlock,
+        linkReference: NewTabLink,
     };
     const {params} = useRouteMatch('/article/:articleId');
     useEffect(() => {
@@ -124,7 +134,10 @@ const StyledMarkdown = styled.div`
         display: inline;
         margin: 0px;
         color: #8c52ff;
-        background-color:#8c52ff40 
+        background-color:#8c52ff40;
+        &:hover{
+            text-decoration: underline;
+        }
     }
     img{
         width: 100%;
