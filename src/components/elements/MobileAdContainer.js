@@ -23,7 +23,7 @@ const MobileAdContainer = ({children, ...others}) => {
         {Math.round(Math.random() * 0.9) ?
             <div>
                 <p className="ad-disclaimer">Advertisement</p>
-                <Advertisement style={{width: '100%', height: 200}} unit="small rectangle" test="medium rectangle"></Advertisement>
+                {/* <Advertisement style={{width: '100%', height: 200}} unit="small rectangle" test="medium rectangle"></Advertisement> */}
                 <p className="ad-disclaimer">Advertisement</p>
             </div>
         :

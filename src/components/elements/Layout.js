@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useState } from 'react';
 import styled from 'styled-components';
 import { Header, Icon, Advertisement, Image, Divider } from 'semantic-ui-react';
@@ -134,6 +134,49 @@ const Root = styled.div`
         // margin: auto;
         margin-bottom: 15px;
     }
+    .email-form{
+        padding: 5px 0px;
+        border: 1px solid #8c52ff;
+        border-radius: 5px;
+        margin-bottom: 30px;
+        text-align: center;
+        input{
+            display: inline-block;
+            width: 300px;
+            text-align: center;
+            border: 2px solid #8c52ff;
+            background: #8c52ff20;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            padding: 10px;
+        }
+        button{
+            cursor: pointer;
+        }
+        #close-form{
+            float: left;
+            border: 2px solid #8c52ff;
+            background: #8c52ff;
+            color: #FFFFFF;
+            border-radius: 100px;
+            padding: 3px 7px;
+            margin-left: 7px;
+
+        }
+        #subscribe-button{
+            display: inline-block;
+            margin-left: 15px;
+            padding: 10px;
+            border: 2px solid #8c52ff;
+            background: #8c52ff;
+            color: #FFFFFF;
+            border-radius: 100px;
+            margin-bottom: 10px;
+        }
+        .warning-message{
+            font-size: 1rem;
+        }
+    }
     @media only screen and (max-width: 1100px) {
         height: 100vh;
         display: grid;
@@ -224,6 +267,8 @@ const Layout = ({meta, children}) => {
         x.addListener(checkWidth); // Attach listener function on state changes   
     });
 
+    const emailForm = useRef();
+
     return <FontProvider>
         <Menu id="sidenav-menu" pageWrapId="page-wrap" disableAutoFocus>
             <NavLink exact to='/' activeClassName="selected-nav"><h1 className="nav-link">Home</h1></NavLink>
@@ -255,7 +300,15 @@ const Layout = ({meta, children}) => {
                 <div style={{width: '100%'}}>
                     <div style={{ padding: "20px 10px", width: "100%", display: "flex", justifyContent: "center"}}>
                         <div style={{width: "100%", maxWidth: 800}}>
-                            <Advertisement id="banner-ad" unit="banner" test='banner'></Advertisement>
+                            {/* <Advertisement id="banner-ad" unit="banner" test='banner'></Advertisement> */}
+                            <div className="email-form" ref={emailForm}>
+                                <button id="close-form" onClick={() => {emailForm.current.style.display = "none";}} >X</button>
+                                <br></br>
+                                <h2>Join our Mailing List</h2>
+                                <p className="warning-message">We will <span className="emphasis">NEVER</span> send spam.</p>
+                                <input placeholder="Enter your Email"></input>
+                                <button id="subscribe-button">Subscribe</button>
+                            </div>
                             {children}
                         </div>
                     </div>
@@ -275,7 +328,7 @@ const Layout = ({meta, children}) => {
                             {author.twitter && <i className="big twitter icon"></i>}
                         </div>
                     </div>
-                    <Advertisement id="adbar-ad" unit={`${width === 'normal'? 'large' : 'small'} rectangle`} test="rectangle"></Advertisement>
+                    {/* <Advertisement id="adbar-ad" unit={`${width === 'normal'? 'large' : 'small'} rectangle`} test="rectangle"></Advertisement> */}
                 </div>
             </div>
         </Root>
