@@ -26,6 +26,11 @@ const Root = styled.div`
     p{
         font-size: 1.5rem;
     }        
+    li{
+        font-size: 1.5rem;
+        line-height: 1.8rem;
+    }        
+
     .mobile-ad
     .selected-nav *{
         color: #8c52ff;

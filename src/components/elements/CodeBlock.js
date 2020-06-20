@@ -22,6 +22,13 @@ const Root = styled.div`
     margin: 0px;
     pre{
         margin: 0px;
+        word-wrap: break-word;
+    }
+
+    @media only screen and (max-width: 600px) {
+        pre{
+            font-size: 0.7rem;
+        }
     }
     code{
         margin: 0px;

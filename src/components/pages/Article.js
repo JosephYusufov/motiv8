@@ -128,7 +128,7 @@ const MobileAuthor = styled.div`
 `
 const StyledMarkdown = styled.div`
     *{
-        margin: 30px;
+        margin: 30px 0px;
     }
     a{
         display: inline;
@@ -138,6 +138,9 @@ const StyledMarkdown = styled.div`
         &:hover{
             text-decoration: underline;
         }
+    }
+    li{
+        
     }
     img{
         width: 100%;
