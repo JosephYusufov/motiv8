@@ -140,6 +140,10 @@ const Root = styled.div`
         border-radius: 5px;
         margin-bottom: 30px;
         text-align: center;
+        position: relative;
+        h2{
+            margin: 0;
+        }
         input{
             display: inline-block;
             width: 300px;
@@ -154,15 +158,16 @@ const Root = styled.div`
             cursor: pointer;
         }
         #close-form{
-            float: left;
             border: 2px solid #8c52ff;
             background: #8c52ff;
             color: #FFFFFF;
             border-radius: 100px;
             padding: 3px 7px;
-            margin-left: 7px;
-
-        }
+            /* margin-left: 7px;    */
+            position: absolute;
+            top: 7px;
+            left: 7px;
+        }   
         #subscribe-button{
             display: inline-block;
             margin-left: 15px;
@@ -303,7 +308,6 @@ const Layout = ({meta, children}) => {
                             {/* <Advertisement id="banner-ad" unit="banner" test='banner'></Advertisement> */}
                             <div className="email-form" ref={emailForm}>
                                 <button id="close-form" onClick={() => {emailForm.current.style.display = "none";}} >X</button>
-                                <br></br>
                                 <h2>Join our Mailing List</h2>
                                 <p className="warning-message">We will <span className="emphasis">NEVER</span> send spam.</p>
                                 <input placeholder="Enter your Email"></input>
