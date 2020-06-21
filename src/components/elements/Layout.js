@@ -100,7 +100,6 @@ const Root = styled.div`
         width: 100%;
         display: flex;
         flex-direction: column;
-        jistify-content: center;
         align-items: center;
         padding: 0px 10%;
         p{
