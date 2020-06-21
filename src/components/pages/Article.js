@@ -103,10 +103,10 @@ const Article = () => {
                             <h2 className="mobile-author-name">{meta.author.name && meta.author.name}</h2>
                             <p>{meta.author.description && meta.author.description}</p>
                             <div className="icons">
-                                {meta.author.facebook && <i className="big facebook f icon"></i>}
-                                {meta.author.youtube && <i className="big youtube icon"></i>}               
-                                {meta.author.instagram && <i className="big instagram icon"></i>}     
-                                {meta.author.twitter && <i className="big twitter icon"></i>}
+                                {meta.author.facebook && <a target="_blank" href={meta.author.facebook}><i className="big facebook f icon"></i></a>}
+                                {meta.author.youtube && <a target="_blank" href={meta.author.youtube}><i className="big youtube icon"></i></a>}
+                                {meta.author.instagram && <a target="_blank" href={meta.author.instagram}><i className="big instagram icon"></i></a>}
+                                {meta.author.twitter && <a target="_blank" href={meta.author.twitter}><i className="big twitter icon"></i></a>}
                             </div>
                         </div>
                     </MobileAuthor>
@@ -121,6 +121,9 @@ const Article = () => {
 const MobileAuthor = styled.div`
     display: none;
     margin-bottom: 30px;
+    a{
+        color: #000000;
+    }
     @media only screen and (max-width: 600px) {
         display: block;
     }

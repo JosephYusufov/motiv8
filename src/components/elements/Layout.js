@@ -105,6 +105,9 @@ const Root = styled.div`
         p{
             font-size: 1.3rem !important;
         }
+        a{
+            color: #000000;
+        }
     }
     .icons{
         display: flex;
@@ -138,12 +141,15 @@ const Root = styled.div`
     .email-form{
         padding: 5px 0px;
         border: 1px solid #8c52ff;
+        background: #8c52ff20;
         border-radius: 5px;
         margin-bottom: 30px;
         text-align: center;
         position: relative;
         h2{
             margin: 0;
+            margin-bottom: 10px;
+            color: #8c52ff;
         }
         input{
             display: inline-block;
@@ -171,15 +177,12 @@ const Root = styled.div`
         #subscribe-button{
             cursor: pointer;
             display: inline-block;  
-            margin-left: 15px;
             text-align: center;
-            line-height: 50px;
-            /* padding: 10px; */
-            height: 50px;
-            width: 100px;
+            width: 300px;
+            padding: 10px;
             border: 2px solid #8c52ff;
-            /* background: #8c52ff20; */
-            color: #8c52ff;
+            background: #8c52ff;
+            color: #FFFFFF;
             border-radius: 100px;
             margin-bottom: 10px;
             *{
@@ -344,8 +347,8 @@ const Layout = ({meta, children}) => {
                                     <button id="close-form" onClick={() => {emailForm.current.style.display = "none";}} >X</button>
                                     <h2>Join our Mailing List</h2>
                                     <p className="warning-message">We will <span className="emphasis">NEVER</span> send spam.</p>
-                                    <input ref={userEmail} placeholder="Enter your Email"></input>
-                                    <div id="subscribe-button" onClick={subscribe}>{subscribeStatus}</div>
+                                    <input ref={userEmail} placeholder="Enter your Email"></input> <br></br>
+                                    <button id="subscribe-button" onClick={subscribe}>{subscribeStatus}</button>
                                 </div>
                             : 
                                 <div className="subscribe-success">
@@ -365,10 +368,10 @@ const Layout = ({meta, children}) => {
                         <h2>{author.name && author.name}</h2>
                         <p>{author.description && author.description}</p>
                         <div className="icons">
-                            {author.facebook && <i className="big facebook f icon"></i>}
-                            {author.youtube && <i className="big youtube icon"></i>}               
-                            {author.instagram && <i className="big instagram icon"></i>}     
-                            {author.twitter && <i className="big twitter icon"></i>}
+                        {author.facebook && <a target="_blank" href={meta.author.facebook}><i className="big facebook f icon"></i></a>}
+                        {author.youtube && <a target="_blank" href={meta.author.youtube}><i className="big youtube icon"></i></a>}
+                        {author.instagram && <a target="_blank" href={meta.author.instagram}><i className="big instagram icon"></i></a>}
+                        {author.twitter && <a target="_blank" href={meta.author.twitter}><i className="big twitter icon"></i></a>}
                         </div>
                     </div>
                     {/* <Advertisement id="adbar-ad" unit={`${width === 'normal'? 'large' : 'small'} rectangle`} test="rectangle"></Advertisement> */}
