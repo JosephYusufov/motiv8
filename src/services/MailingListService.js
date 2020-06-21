@@ -4,7 +4,7 @@
 // }
 
 export const addToMailingList = (data) => {
-    return fetch('http://api.readbitwise.com/mailing-list/add', {
+    return fetch('https://api.readbitwise.com/mailing-list/add', {
         method: "POST",
         headers: {
             'Content-Type': 'application/json'
