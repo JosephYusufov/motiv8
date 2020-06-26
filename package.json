@@ -25,7 +25,8 @@
     "start": "react-scripts start --host",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "cd ../motiv8-backend/client/; rm -rf build; cd ../../motiv8-framework/; npm run build; cp -r build ../motiv8-backend/client; rm -rf build; cd ../motiv8-backend; git add *; git commit -m 'automatic deploy script'; git push; pull-backend"
   },
   "eslintConfig": {
     "extends": "react-app"

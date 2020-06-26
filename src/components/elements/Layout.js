@@ -1,14 +1,14 @@
 import React, { useEffect, useRef } from 'react';
 import { useState } from 'react';
 import styled from 'styled-components';
-import { Header, Icon, Advertisement, Image, Divider, Loader } from 'semantic-ui-react';
+import { Header, Icon, Advertisement, Image, Divider, Loader, Modal } from 'semantic-ui-react';
 import { Link, NavLink, useHistory } from 'react-router-dom';
 import { slide as Menu } from 'react-burger-menu';
 import Footer from './Footer.js';
 import logo from '../../assets/bitwise-logo.png';
 import './sideMenu.css';
 
-import { addToMailingList } from '../../services/MailingListService';
+import MailingList from './MailingList.js';
 
 const FontProvider = styled.div`
     @import url('https://fonts.googleapis.com/css2?family=Manrope&display=swap');    
@@ -138,69 +138,6 @@ const Root = styled.div`
         // margin: auto;
         margin-bottom: 15px;
     }
-    .email-form{
-        padding: 5px 0px;
-        border: 1px solid #8c52ff;
-        background: #8c52ff20;
-        border-radius: 5px;
-        margin-bottom: 30px;
-        text-align: center;
-        position: relative;
-        h2{
-            margin: 0;
-            margin-bottom: 10px;
-            color: #8c52ff;
-        }
-        input{
-            display: inline-block;
-            width: 300px;
-            text-align: center;
-            border: 2px solid #8c52ff;
-            border-radius: 5px;
-            margin-bottom: 10px;
-            padding: 10px;
-        }
-        button{
-            cursor: pointer;
-        }
-        #close-form{
-            border: 2px solid #8c52ff;
-            background: #8c52ff;
-            color: #FFFFFF;
-            border-radius: 100px;
-            padding: 3px 7px;
-            /* margin-left: 7px;    */
-            position: absolute;
-            top: 7px;
-            left: 7px;
-        }   
-        #subscribe-button{
-            cursor: pointer;
-            display: inline-block;  
-            text-align: center;
-            width: 300px;
-            padding: 10px;
-            border: 2px solid #8c52ff;
-            background: #8c52ff;
-            color: #FFFFFF;
-            border-radius: 100px;
-            margin-bottom: 10px;
-            *{
-                margin: 0px;
-                padding: 0px;
-            }
-        }
-        .warning-message{
-            font-size: 1rem;
-        }
-    }
-    .subscribe-success{
-        background: #00FF0020;
-        border: 2px solid #00FF00;
-        border-radius: 5px;
-        margin-bottom: 30px;
-        padding: 10px;
-    }
     @media only screen and (max-width: 1100px) {
         height: 100vh;
         display: grid;
@@ -270,7 +207,8 @@ const Layout = ({meta, children}) => {
     const [author, setAuthor] = useState({});
     const history = useHistory();
     const [width, setWidth] = useState('normal');
-    const [subscribeStatus, setSubscribeStatus] = useState('Subscribe');
+    const [isOpen, setIsOpen] = useState(false);
+
     useEffect(() => {
         if(meta){
             setAuthor(meta.author);
@@ -280,35 +218,37 @@ const Layout = ({meta, children}) => {
     function checkWidth(x) {
         if (x.matches) { // If media query matches
             setWidth('small');
-            // console.log(width);
         } else {
             setWidth('normal');
-            // console.log(width);
         }
     };
+    
+    const handleClose = () => {
+        setIsOpen(false);
+    };
+
+    const mailingListSuccess = () => {
+        setTimeout(handleClose, 1500);
+    }
+
     useEffect(() => {     
         var x = window.matchMedia("(max-width: 1100px)");
         checkWidth(x); // Call listener function at run time
         x.addListener(checkWidth); // Attach listener function on state changes   
+
     });
 
-    const emailForm = useRef();
-    const userEmail = useRef();
+    useEffect(() => {
+        const handleScroll = () => {
+            let currentScroll = window.pageYOffset;
+            if(currentScroll >= window.innerHeight * 2){
+                setIsOpen(true);
+                window.removeEventListener('scroll', handleScroll);
+            };
+        };
+        window.addEventListener('scroll', handleScroll); 
+    }, [])
 
-    const subscribe = () => {
-        setSubscribeStatus(<Loader active inline size="small" />);
-        addToMailingList({
-            email_address: userEmail.current.value,
-            status: "subscribed"
-        }).then(res => {
-            console.log(res);
-            if(res.status === 200){
-                setSubscribeStatus("alreadySubscribed");
-            } else {
-                setSubscribeStatus("Subscribe");
-            }
-        });
-    };
 
     return <FontProvider>
         <Menu id="sidenav-menu" pageWrapId="page-wrap" disableAutoFocus>
@@ -320,6 +260,10 @@ const Layout = ({meta, children}) => {
             <NavLink exact to='/gaming' activeClassName="selected-nav"><h1 className="nav-link" as="h1">Gaming</h1></NavLink>
         </Menu>
         <Root id="page-wrap">
+        <Modal size="tiny" open={isOpen} onClose={handleClose}>
+            <MailingList noCloseButton={true} callback={mailingListSuccess}/>
+        </Modal>
+
         <div className="mobile-navbar">
             <div className="logo-container">
                 <img onClick={() => {history.push('/')}} style={{cursor: "pointer"}} src={logo} height="40px" alt="logo"></img>
@@ -342,19 +286,7 @@ const Layout = ({meta, children}) => {
                     <div style={{ padding: "20px 10px", width: "100%", display: "flex", justifyContent: "center"}}>
                         <div style={{width: "100%", maxWidth: 800}}>
                             {/* <Advertisement id="banner-ad" unit="banner" test='banner'></Advertisement> */}
-                            {subscribeStatus !== "alreadySubscribed"?                            
-                                <div className="email-form" ref={emailForm}>
-                                    <button id="close-form" onClick={() => {emailForm.current.style.display = "none";}} >X</button>
-                                    <h2>Join our Mailing List</h2>
-                                    <p className="warning-message">We will <span className="emphasis">NEVER</span> send spam.</p>
-                                    <input ref={userEmail} placeholder="Enter your Email"></input> <br></br>
-                                    <button id="subscribe-button" onClick={subscribe}>{subscribeStatus}</button>
-                                </div>
-                            : 
-                                <div className="subscribe-success">
-                                    <h2>👍 You've subscribed to the mailing list</h2>
-                                </div>
-                            }
+                            <MailingList style={{marginBottom: 30}}/>
                             {children}
                         </div>
                     </div>
